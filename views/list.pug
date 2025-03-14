@@ -1,5 +1,11 @@
-extends layout
-
-block content
-  h1= title
-  p List of reservations will be displayed here.
+doctype html
+html
+  head
+    title= title
+  body
+    h1 List of Requests
+    ul
+      li Request 1 - <a href="/approve">Approve</a> | <a href="/deny">Deny</a>
+      li Request 2 - <a href="/approve">Approve</a> | <a href="/deny">Deny</a>
+    br
+    a(href="/request") Make a New Request

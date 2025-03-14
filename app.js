@@ -1,24 +1,21 @@
-const express = require('express');
-const path = require('path');
-const dotenv = require('dotenv');
-
-dotenv.config();
+const express = require("express");
+const path = require("path");
 
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// Set up Pug as the view engine
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// Middleware for serving static files (optional)
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', require('./routes/index'));
-app.use('/list', require('./routes/list'));
-app.use('/request', require('./routes/request'));
-app.use('/approve', require('./routes/approve'));
-app.use('/deny', require('./routes/deny'));
+// Routes
+app.get("/", (req, res) => res.render("list", { title: "List Page" }));
+app.get("/approve", (req, res) => res.render("approve", { title: "Approve Page" }));
+app.get("/deny", (req, res) => res.render("deny", { title: "Deny Page" }));
+app.get("/request", (req, res) => res.render("request", { title: "Request Page" }));
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Start the server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

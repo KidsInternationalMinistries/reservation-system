@@ -1,5 +1,12 @@
-extends layout
-
-block content
-  h1= title
-  p Request a reservation here.
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Submit a New Request
+    form(action="/" method="post")
+      label(for="request") Enter Request:
+      input(type="text" name="request" required)
+      button(type="submit") Submit
+    br
+    a(href="/") Back to List
